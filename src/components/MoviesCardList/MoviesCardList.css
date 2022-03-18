@@ -1,0 +1,34 @@
+.movies {
+  padding: 70px 70px 10px;
+}
+
+.movies__list {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.undecorated-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+@media screen and (max-width: 960px) {
+  .movies {
+    padding: 60px 30px 30px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .movies {
+    padding: 40px 10px 20px;
+  }
+
+  .movies__list {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}

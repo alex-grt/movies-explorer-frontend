@@ -1,0 +1,161 @@
+.about {
+  padding: 110px 70px;
+  background-color: #202020;
+}
+
+.about__title {
+  border-bottom: 1px solid #dadada;
+  margin: 0;
+  padding-bottom: 23px;
+  font-size: 22px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.23;
+  letter-spacing: -0.04em;
+}
+
+.about__table {
+  margin: 70px 0 110px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+.about__column {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 26px;
+}
+
+.about__cell-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+
+.about__cell {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.43;
+}
+
+.about__visual {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.about__visual-item {
+  margin: 0;
+  padding: 14px 0 0;
+  color: #8b8b8b;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1.21;
+}
+
+.about__visual-item_theme_green {
+  padding: 9px 0;
+  background-color: #3ddc84;
+  color: #000;
+  font-weight: 400;
+}
+
+.about__visual-item_theme_gray {
+  padding: 9px 0;
+  background-color: #303030;
+  color: #fff;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 960px) {
+  .about {
+    padding: 90px 50px;
+  }
+
+  .about__table {
+    margin: 70px 0 93px;
+    gap: 30px;
+  }
+
+  .about__column {
+    gap: 22px;
+  }
+
+  .about__cell {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .about__visual-item {
+    color: #a0a0a0;
+    font-weight: 400;
+  }
+
+  .about__visual-item_theme_green {
+    color: #000;
+  }
+
+  .about__visual-item_theme_gray {
+    color: #fff;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .about {
+    padding: 70px 18px;
+  }
+
+  .about__title {
+    padding-bottom: 28px;
+    font-size: 18px;
+    line-height: 1.22;
+  }
+
+  .about__table {
+    margin: 60px 0;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 56px;
+  }
+
+  .about__column {
+    gap: 16px;
+  }
+
+  .about__cell-title {
+    font-size: 18px;
+    line-height: 1.22;
+  }
+
+  .about__cell {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .about__visual {
+    grid-template-columns: 35% 65%;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .about__visual-item {
+    padding: 10px 0 0;
+    font-size: 11px;
+    line-height: 1.18;
+  }
+
+  .about__visual-item_theme_green {
+    padding: 11px 0;
+  }
+
+  .about__visual-item_theme_gray {
+    padding: 11px 0;
+  }
+}

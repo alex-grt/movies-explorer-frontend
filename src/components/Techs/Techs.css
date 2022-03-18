@@ -1,0 +1,142 @@
+.techs {
+  padding: 100px 70px;
+  background-color: #272727;
+}
+
+.techs__title {
+  border-bottom: 1px solid #dadada;
+  margin: 0;
+  padding-bottom: 23px;
+  font-size: 22px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.23;
+  letter-spacing: -0.04em;
+}
+
+.technology {
+  padding-top: 90px;
+}
+
+.technology__title {
+  margin: 0 auto 26px;
+  text-align: center;
+  font-size: 50px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.16;
+  letter-spacing: -0.04em;
+}
+
+.technology__subtitle {
+  max-width: 460px;
+  margin: 0 auto 100px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: -0.04em;
+}
+
+.technology__list {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.undecorated-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.technology__item {
+  width: 90px;
+  height: 60px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #303030;
+}
+
+.technology__item-text {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.21;
+  letter-spacing: -0.04em;
+}
+
+@media screen and (max-width: 960px) {
+  .techs {
+    padding: 90px 50px;
+  }
+
+  .technology {
+    padding-top: 80px;
+  }
+
+  .technology__title {
+    margin: 0 auto 22px;
+  }
+
+  .technology__subtitle {
+    margin: 0 auto 83px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .technology__item {
+    width: 84px;
+    height: 57px;
+  }
+
+  .technology__item-text {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .techs {
+    padding: 70px 18px;
+  }
+
+  .techs__title {
+    padding-bottom: 28px;
+    font-size: 18px;
+    line-height: 1.22;
+  }
+
+  .technology {
+    padding-top: 60px;
+  }
+
+  .technology__title {
+    margin: 0 auto 24px;
+    font-size: 30px;
+    line-height: 1.2;
+  }
+
+  .technology__subtitle {
+    margin: 0 auto 50px;
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .technology__list {
+    max-width: 80%;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .technology__list {
+    max-width: 178px;
+    justify-content: flex-start;
+  }
+}
