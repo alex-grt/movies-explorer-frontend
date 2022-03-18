@@ -6,5 +6,5 @@
 * повторение материала по работе с HTML, CSS, JavaScript и React.js  
 * повторение основ деплоя и настройки сервера.  
 ## Работа с проектом
-Публичный ip-адрес для сервисного доступа - `https://www.figma.com/file/6ZxeQHSe2OKdPPWcNcnrjR/Diploma?node-id=891%3A3857`  
+Адрес макета - `https://www.figma.com/file/6ZxeQHSe2OKdPPWcNcnrjR/Diploma?node-id=891%3A3857`  
 Адрес проекта - `movies-explorer.agrt.nomoredomains.work`
