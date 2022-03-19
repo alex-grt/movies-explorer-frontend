@@ -4,7 +4,7 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 function SearchForm() {
   return (
     <section className="search" aria-label="поиск">
-      <form className="search__form" noValidate>
+      <form className="search__form">
         <input
           className="search__input"
           type="text"

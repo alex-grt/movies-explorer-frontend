@@ -135,6 +135,10 @@
 }
 
 @media screen and (max-width: 320px) {
+  .techs {
+    background-color: #202020;
+  }
+
   .technology__list {
     max-width: 178px;
     justify-content: flex-start;

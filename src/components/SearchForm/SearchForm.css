@@ -29,7 +29,7 @@
 }
 
 .search__input:focus {
-  outline: none;
+  outline: 1px solid #8b8b8b;
 }
 
 .search__button {

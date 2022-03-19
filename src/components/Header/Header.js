@@ -36,7 +36,7 @@ function Header(props) {
         </div>
       :
         <>
-          <Navigation isOpen={false} />
+          <Navigation isOpen={props.isOpen} />
           <button
             className="header__button-menu"
             type="button"
