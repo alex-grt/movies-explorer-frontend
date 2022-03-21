@@ -1,0 +1,16 @@
+.navtab {
+  min-height: 50px;
+  background-color: #073042;
+}
+
+@media screen and (max-width: 960px) {
+  .navtab {
+    min-height: 66px;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .navtab {
+    display: none;
+  }
+}

@@ -1,0 +1,119 @@
+.movie {
+  display: flex;
+  justify-content: space-between;
+  background-color: #2f2f2f;
+}
+
+.movie__cover {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.movie__title {
+  margin: 0 0 13px;
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1.22;
+}
+
+.movie__duration {
+  margin: 0 0 30px;
+  color: #8b8b8b;
+  font-size: 11px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.18;
+}
+
+.movie__button-delete {
+  width: 8px;
+  height: 8px;
+  border: none;
+  margin: 3px 2px;
+  padding: 0;
+  background: none;
+  background-image: url('../../images/close.svg');
+  background-size: contain;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+}
+
+.movie__button-delete:hover {
+  cursor: pointer;
+  opacity: .7;
+}
+
+.movie__button-like {
+  width: 14px;
+  height: 12px;
+  border: none;
+  padding: 0;
+  background: none;
+  background-image: url('../../images/like.svg');
+  background-size: contain;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+}
+
+.movie__button-like:hover {
+  cursor: pointer;
+  opacity: .7;
+}
+
+.movie__button-like_active {
+  background-image: url('../../images/like-active.svg');
+}
+
+.movie__image {
+  width: 232px;
+  height: 134px;
+  padding: 6px;
+  box-sizing: border-box;
+  object-fit: cover;
+  object-position: center center;
+}
+
+@media screen and (max-width: 640px) {
+  .movie {
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+  }
+
+  .movie__cover {
+    padding: 14px 16px 14px 12px;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .movie__title {
+    margin: 0 0 8px;
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  .movie__duration {
+    margin: 0;
+  }
+
+  .movie__button-delete {
+    width: 10px;
+    height: 10px;
+  }
+
+  .movie__image {
+    width: 300px;
+    height: 168px;
+    padding: 6px 0 0;
+    align-self: center;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .movie__image {
+    width: 100%;
+    padding: 0;
+  }
+}

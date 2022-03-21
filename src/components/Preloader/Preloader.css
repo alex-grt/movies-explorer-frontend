@@ -1,0 +1,130 @@
+@keyframes preloader-inside-white {
+  0% {
+    -webkit-transform: scale(0, 0);
+    -moz-transform: scale(0, 0);
+    -ms-transform: scale(0, 0);
+    -o-transform: scale(0, 0);
+    transform: scale(0, 0);
+  }
+  100% {
+    -webkit-transform: scale(1, 1);
+    -moz-transform: scale(1, 1);
+    -ms-transform: scale(1, 1);
+    -o-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes preloader-inside-green {
+  0% {
+    -webkit-transform: scale(0, 0);
+    -moz-transform: scale(0, 0);
+    -ms-transform: scale(0, 0);
+    -o-transform: scale(0, 0);
+    transform: scale(0, 0);
+  }
+  30% {
+    -webkit-transform: scale(0, 0);
+    -moz-transform: scale(0, 0);
+    -ms-transform: scale(0, 0);
+    -o-transform: scale(0, 0);
+    transform: scale(0, 0);
+  }
+  100% {
+    -webkit-transform: scale(1, 1);
+    -moz-transform: scale(1, 1);
+    -ms-transform: scale(1, 1);
+    -o-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+}
+
+.preloader {
+  width: 100%;
+  height: 166px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.preloader_size_min {
+  height: 140px;
+}
+
+.preloader__button {
+  width: 320px;
+  height: 36px;
+  border: 1px solid #424242;
+  border-radius: 6px;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  bottom: 15px;
+  background: none;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1.25;
+}
+
+.preloader__button:hover {
+  cursor: pointer;
+  opacity: .7;
+}
+
+.preloader__button_invisible {
+  display: none;
+}
+
+.preloader__container {
+  width: 100px;
+  height: 100px;
+  display: none;
+  position: relative;
+}
+
+.preloader__container_active {
+  display: block;
+}
+
+.preloader__round {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #3ddc84;
+}
+
+.preloader__round::after,
+.preloader__round::before {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+}
+
+.preloader__round::after {
+  background: white;
+  animation: preloader-inside-white 1s ease-in-out infinite;
+}
+
+.preloader__round::before {
+  z-index: 10;
+  background: #3ddc84;
+  animation: preloader-inside-green 1s ease-in-out infinite;
+}
+
+@media screen and (max-width: 640px) {
+  .preloader__button {
+    width: 240px;
+  }
+}
