@@ -29,7 +29,7 @@
 }
 
 .movie__button-delete {
-  width: 8px;
+  min-width: 8px;
   height: 8px;
   border: none;
   margin: 3px 2px;
@@ -47,7 +47,7 @@
 }
 
 .movie__button-like {
-  width: 14px;
+  min-width: 14px;
   height: 12px;
   border: none;
   padding: 0;
@@ -99,15 +99,22 @@
   }
 
   .movie__button-delete {
-    width: 10px;
+    min-width: 10px;
     height: 10px;
+  }
+
+  .movie__button-like {
+    margin-left: 20px;
+  }
+
+  .movie__trailer {
+    align-self: center;
   }
 
   .movie__image {
     width: 300px;
     height: 168px;
     padding: 6px 0 0;
-    align-self: center;
   }
 }
 

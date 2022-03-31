@@ -1,14 +1,36 @@
 import './Profile.css';
+import React from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { Link } from 'react-router-dom';
+import { useFormWithValidation } from '../../hooks/useValidation';
 
-function Profile() {
+function Profile(props) {
+  const currentUser = React.useContext(CurrentUserContext);
+  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
+  const noDuplicate = values.name !== currentUser.name || values.email !== currentUser.email;
+
+  React.useEffect(() => {
+    resetForm();
+  }, [resetForm])
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+
+    props.onUserUpdate({
+      name: values.name,
+      email: values.email,
+    });
+  }
+
   return (
     <section className="profile">
       <div className="profile__cover">
-        <h2 className="profile__title">Привет, Username!</h2>
+        <h2 className="profile__title">Привет, {currentUser.name}!</h2>
         <form
           className="profile__form"
           name="profile"
+          noValidate
+          onSubmit={handleSubmit}
         >
           <div className="profile__inputs">
             <div className="profile__cover-input">
@@ -16,12 +38,13 @@ function Profile() {
                 <label className="profile__label" htmlFor="profile-name">Имя</label>
                 <input
                   className="profile__input"
-                  name="profile-name"
+                  name="name"
                   id="profile-name"
                   type="text"
-                  defaultValue="Username"
+                  onChange={handleChange}
                   minLength="2"
                   maxLength="30"
+                  placeholder={currentUser.name}
                   required
                 />
               </div>
@@ -29,7 +52,7 @@ function Profile() {
                 className="profile__error"
                 id="profile-name-error"
               >
-
+                {errors.name ? errors.name : ''}
               </span>
             </div>
             <div className="profile__line" />
@@ -38,10 +61,11 @@ function Profile() {
                 <label className="profile__label" htmlFor="profile-email">E-mail</label>
                 <input
                   className="profile__input"
-                  name="profile-email"
+                  name="email"
                   id="profile-email"
-                  defaultValue="example@example.com"
                   type="email"
+                  onChange={handleChange}
+                  placeholder={currentUser.email}
                   required
                 />
               </div>
@@ -49,21 +73,27 @@ function Profile() {
                 className="profile__error"
                 id="profile-email-error"
               >
-                Что-то пошло не так...
+                {errors.email ? errors.email : ''}
               </span>
             </div>
           </div>
           <button
-            className="profile__button-submit"
+            className={`profile__button-submit${
+              isValid && noDuplicate
+                ? ''
+                : ' profile__button-submit_inactive'
+            }`}
             type="submit"
-            aria-label="кнопка Войти"
+            aria-label="кнопка Редактировать"
+            disabled={!isValid}
           >
-            Редактировать
+            {props.buttonTitle}
           </button>
         </form>
         <Link
           to="/"
           className="profile__link"
+          onClick={props.onSignOut}
         >
           Выйти из аккаунта
         </Link>

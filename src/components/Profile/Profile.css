@@ -60,6 +60,11 @@
   line-height: 1.18;
 }
 
+.profile__input::placeholder {
+  opacity: 1;
+  color: #fff;
+}
+
 .profile__input:focus {
   outline: 1px solid #8b8b8b;
 }
@@ -97,6 +102,15 @@
 .profile__button-submit:hover {
   cursor: pointer;
   opacity: .7;
+}
+
+.profile__button-submit_inactive {
+  opacity: .5;
+}
+
+.profile__button-submit_inactive:hover {
+  cursor: default;
+  opacity: .5;
 }
 
 .profile__link {

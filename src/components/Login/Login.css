@@ -92,6 +92,16 @@
   opacity: .8;
 }
 
+.login__button-submit_inactive {
+  opacity: .6;
+  color: #fff;
+}
+
+.login__button-submit_inactive:hover {
+  cursor: default;
+  opacity: .6;
+}
+
 .login__text {
   margin: 0;
   color: #8b8b8b;

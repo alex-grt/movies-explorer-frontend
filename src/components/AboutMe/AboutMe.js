@@ -19,12 +19,12 @@ function AboutMe() {
           </div>
           <div className="info__links">
             <a
-              href="https://www.facebook.com/"
+              href="https://vk.com/"
               className="info__link"
               target="_blank"
               rel="noreferrer"
             >
-              Facebook
+              ВКонтакте
             </a>
             <a
               href="https://github.com/alex-grt/"

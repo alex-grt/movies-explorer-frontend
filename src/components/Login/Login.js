@@ -1,41 +1,67 @@
 import './Login.css';
-import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useFormWithValidation } from '../../hooks/useValidation';
 
-function Login() {
+function Login(props) {
+  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
+
+  React.useEffect(() => {
+    resetForm();
+  }, [resetForm])
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+
+    props.onLogin({
+      email: values.email,
+      password: values.pswd,
+    });
+  }
+
   return (
     <section className="login">
       <div className="login__cover">
-        <img className="login__logo" src={logo} alt="логотип сайта" />
+        <Link
+          to="/"
+          className="login__logo-link"
+        >
+          <img className="login__logo" src={logo} alt="логотип сайта" />
+        </Link>
         <h2 className="login__title">Рады видеть!</h2>
         <form
           className="login__form"
           name="login"
+          noValidate
+          onSubmit={handleSubmit}
         >
           <div className="login__inputs">
             <div className="login__cover-input">
               <label className="login__label" htmlFor="login-email">E-mail</label>
               <input
                 className="login__input"
-                name="login-email"
+                name="email"
                 id="login-email"
                 type="email"
+                onChange={handleChange}
                 required
               />
               <span
                 className="login__error"
                 id="login-email-error"
               >
-                Что-то пошло не так...
+                {errors.email ? errors.email : ''}
               </span>
             </div>
             <div className="login__cover-input">
               <label className="login__label" htmlFor="login-pswd">Пароль</label>
               <input
                 className="login__input"
-                name="login-pswd"
+                name="pswd"
                 id="login-pswd"
                 type="password"
+                onChange={handleChange}
                 minLength="6"
                 maxLength="20"
                 required
@@ -44,14 +70,19 @@ function Login() {
                 className="login__error"
                 id="login-pswd-error"
               >
-                Что-то пошло не так...
+                {errors.pswd ? errors.pswd : ''}
               </span>
             </div>
           </div>
           <button
-            className="login__button-submit"
+            className={`login__button-submit${
+              isValid
+                ? ''
+                : ' login__button-submit_inactive'
+            }`}
             type="submit"
             aria-label="кнопка Войти"
+            disabled={!isValid}
           >
             Войти
           </button>

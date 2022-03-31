@@ -10,6 +10,7 @@
   z-index: 1;
   background-color: rgba(0, 0, 0, .5);
   transition: visibility .4s, opacity .4s;
+  visibility: hidden;
   opacity: 0;
 }
 
@@ -19,8 +20,10 @@
 }
 
 .tooltip {
+  max-width: 400px;
   border-radius: 20px;
   padding: 60px 60px 20px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -65,7 +68,8 @@
 
 @media screen and (max-width: 460px) {
   .tooltip {
-    padding: 50px 60px 20px;
+    max-width: 280px;
+    padding: 50px 50px 20px;
   }
 
   .tooltip__title {

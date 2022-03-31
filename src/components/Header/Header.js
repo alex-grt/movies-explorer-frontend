@@ -36,11 +36,15 @@ function Header(props) {
         </div>
       :
         <>
-          <Navigation isOpen={props.isOpen} />
+          <Navigation
+            isOpen={props.isOpen}
+            onClose={props.onClose}
+          />
           <button
             className="header__button-menu"
             type="button"
             aria-label="кнопка Меню"
+            onClick={props.onMenuClick}
           >
             <div className="header__menu-line" />
             <div className="header__menu-line" />
