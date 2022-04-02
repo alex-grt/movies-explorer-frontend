@@ -9,8 +9,6 @@ function Movies(props) {
     query,
     setQuery,
     isShort,
-    isSearchStatus,
-    setIsSearchStatus,
     isSearchError,
     setIsSearchError,
     preloaderVisible,
@@ -28,10 +26,9 @@ function Movies(props) {
 
   React.useEffect(() => {
     if (!props.loggedIn) {
-      setIsSearchStatus(false);
       setIsSearchError(false);
     }
-  }, [props.loggedIn, setIsSearchStatus, setIsSearchError]);
+  }, [props.loggedIn, setIsSearchError]);
 
   return (
     <main>
@@ -45,12 +42,12 @@ function Movies(props) {
       <MoviesCardList
         movies={movies}
         preloaderVisible={preloaderVisible}
-        searchStatus={isSearchStatus}
         searchError={isSearchError}
         isShort={isShort}
         counterRender={props.counterRender}
         isMobile={props.isMobile}
         savedMovies={props.savedMovies}
+        allSavedMovies={props.allSavedMovies}
         toggleLike={props.toggleLike}
       />
       <div className="render-button">

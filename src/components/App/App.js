@@ -16,6 +16,11 @@ import Tooltip from '../Tooltip/Tooltip';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import RedirectedRoute from '../RedirectedRoute/RedirectedRoute';
 import mainApi from '../../utils/MainApi';
+import {
+  VISIBLE_ITEMS_MOBILE,
+  VISIBLE_ITEMS_DESKTOP,
+  MAX_WIDTH_MOBILE
+} from '../../utils/constants';
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({ name: '', email: '', id: '' });
@@ -23,17 +28,16 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isTooltipOpen, setIsTooltipOpen] = React.useState(false);
   const [isTooltipContent, setTooltipContent] = React.useState({ title: '', text: '' });
-  const [savedMovies, setSavedMovies] = React.useState(
-    JSON.parse(localStorage.getItem('found-saved-movies')) || {}
-  );
+  const [savedMovies, setSavedMovies] = React.useState({});
+  const [allSavedMovies, setAllSavedMovies] = React.useState([]);
   const [counterRender, setCounterRender] = React.useState({
-    mobile: 5,
-    desktop: 7
+    mobile: VISIBLE_ITEMS_MOBILE,
+    desktop: VISIBLE_ITEMS_DESKTOP
   });
   const [buttonTitle, setButtonTitle] = React.useState({
     edit: 'Редактировать'
   });
-  const isMobile = useMediaQuery({ maxWidth: 1024 });
+  const isMobile = useMediaQuery({ maxWidth: MAX_WIDTH_MOBILE });
 
   React.useEffect(() => {
     const token = localStorage.getItem('token');
@@ -82,11 +86,8 @@ function App() {
           };
 
           localStorage.setItem('saved-movies-from-server', JSON.stringify(results));
-          if (JSON.parse(localStorage.getItem('found-saved-movies'))) {
-            setSavedMovies(JSON.parse(localStorage.getItem('found-saved-movies')));
-          } else {
-            setSavedMovies(results);
-          }
+          setSavedMovies(results);
+          setAllSavedMovies(mySavedMovies);
         })
         .catch(err => {
           setTooltipContent({
@@ -178,9 +179,10 @@ function App() {
     localStorage.removeItem('found-movies');
     localStorage.removeItem('found-saved-movies');
     setSavedMovies({});
+    setAllSavedMovies([]);
     setCounterRender({
-      mobile: 5,
-      desktop: 7
+      mobile: VISIBLE_ITEMS_MOBILE,
+      desktop: VISIBLE_ITEMS_DESKTOP
     });
     setLoggedIn(false);
   }
@@ -250,6 +252,8 @@ function App() {
               movie._id === id ? null : movie
             )
           });
+          setAllSavedMovies(allSavedMovies.filter(movie =>
+            movie._id === id ? null : movie));
 
           const result = savedMoviesFromServer.filter(movie => movie._id !== id);
           localStorage.setItem('saved-movies-from-server', JSON.stringify({
@@ -270,6 +274,7 @@ function App() {
             short: false,
             list: [newSavedMovie, ...savedMovies.list]
           });
+          setAllSavedMovies([newSavedMovie, ...allSavedMovies]);
 
           savedMoviesFromServer.unshift(newSavedMovie);
           localStorage.setItem('saved-movies-from-server', JSON.stringify({
@@ -299,6 +304,8 @@ function App() {
             movie._id === id ? null : movie
           )
         });
+        setAllSavedMovies(allSavedMovies.filter(movie =>
+          movie._id === id ? null : movie));
 
         const result = savedMoviesFromServer.filter(movie => movie._id !== id);
         localStorage.setItem('saved-movies-from-server', JSON.stringify({
@@ -317,12 +324,12 @@ function App() {
     if (isMobile) {
       setCounterRender({
         ...counterRender,
-        mobile: counterRender.mobile + 5
+        mobile: counterRender.mobile + VISIBLE_ITEMS_MOBILE
       });
     } else {
       setCounterRender({
         ...counterRender,
-        desktop: counterRender.desktop + 7
+        desktop: counterRender.desktop + VISIBLE_ITEMS_DESKTOP
       });
     }
   }
@@ -368,6 +375,7 @@ function App() {
                 isMobile={isMobile}
                 handleRenderButtonClick={handleRenderButtonClick}
                 savedMovies={savedMovies}
+                allSavedMovies={allSavedMovies}
                 setSavedMovies={setSavedMovies}
                 toggleLike={toggleLike}
               />
@@ -387,6 +395,7 @@ function App() {
                 loggedIn={loggedIn}
                 setCounterRender={setCounterRender}
                 savedMovies={savedMovies}
+                allSavedMovies={allSavedMovies}
                 setSavedMovies={setSavedMovies}
                 deleteMovie={deleteMovie}
               />

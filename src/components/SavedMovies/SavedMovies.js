@@ -9,8 +9,6 @@ function SavedMovies(props) {
     query,
     setQuery,
     isShort,
-    isSearchStatus,
-    setIsSearchStatus,
     isSearchError,
     setIsSearchError,
     preloaderVisible,
@@ -25,10 +23,9 @@ function SavedMovies(props) {
 
   React.useEffect(() => {
     if (!props.loggedIn) {
-      setIsSearchStatus(false);
       setIsSearchError(false);
     }
-  }, [props.loggedIn, setIsSearchStatus, setIsSearchError]);
+  }, [props.loggedIn, setIsSearchError]);
 
   return (
     <main>
@@ -42,10 +39,10 @@ function SavedMovies(props) {
       <MoviesCardList
         movies={movies}
         preloaderVisible={preloaderVisible}
-        searchStatus={isSearchStatus}
         searchError={isSearchError}
         isShort={isShort}
         savedMovies={props.savedMovies}
+        allSavedMovies={props.allSavedMovies}
         deleteMovie={props.deleteMovie}
       />
       <div className="plug" />

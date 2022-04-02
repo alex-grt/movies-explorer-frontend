@@ -1,21 +1,21 @@
 import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
+import { MINUTES_IN_AN_HOUR } from '../../utils/constants';
 
 function MoviesCard(props) {
   const { pathname } = useLocation();
-  const isLiked = props.savedMovies?.list?.some(
-    savedMovie => savedMovie.movieId === props.movie.id
+  const isLiked = props.allSavedMovies?.some(
+    savedMovie => savedMovie.movieId === props.movie?.id
   );
-  const duration =
-    pathname === '/saved-movies'
-      ? Math.floor(props.savedMovie.duration / 60) +
-        'ч ' +
-        props.savedMovie.duration % 60 +
-        'м'
-      : Math.floor(props.movie.duration / 60) +
-        'ч ' +
-        props.movie.duration % 60 +
-        'м';
+  const duration = pathname === '/saved-movies'
+    ? Math.floor(props.savedMovie.duration / MINUTES_IN_AN_HOUR) +
+      'ч ' +
+      props.savedMovie.duration % MINUTES_IN_AN_HOUR +
+      'м'
+    : Math.floor(props.movie.duration / MINUTES_IN_AN_HOUR) +
+      'ч ' +
+      props.movie.duration % MINUTES_IN_AN_HOUR +
+      'м';
 
   function handleDeleteMovie() {
     props.deleteMovie(props.savedMovie._id);

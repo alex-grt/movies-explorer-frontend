@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+const validator = require('validator');
 
 export function useFormWithValidation() {
   const [values, setValues] = React.useState({});
@@ -9,9 +10,22 @@ export function useFormWithValidation() {
     const target = evt.target;
     const name = target.name;
     const value = target.value;
+
     setValues({...values, [name]: value});
-    setErrors({...errors, [name]: target.validationMessage });
-    setIsValid(target.closest('form').checkValidity());
+
+    if (name === 'email') {
+      !validator.isEmail(value)
+        ? setErrors({...errors, [name]: 'Некорректные данные в поле E-mail' })
+        : setErrors({...errors, [name]: '' });
+    } else {
+      setErrors({...errors, [name]: target.validationMessage });
+    }
+
+    if (name === 'email') {
+      setIsValid(validator.isEmail(value));
+    } else {
+      setIsValid(target.closest('form').checkValidity());
+    }
   };
 
   const resetForm = useCallback(

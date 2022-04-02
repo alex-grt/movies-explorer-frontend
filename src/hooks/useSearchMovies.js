@@ -12,7 +12,6 @@ export function useSearchMovies(
   const [isShort, setIsShort] = React.useState(
     JSON.parse(localStorage.getItem(`found-${component}`))?.short || false
   );
-  const [isSearchStatus, setIsSearchStatus] = React.useState(false);
   const [isSearchError, setIsSearchError] = React.useState(false);
   const [preloaderVisible, setPreloaderVisible] = React.useState(false);
   const moviesFromServer = JSON.parse(
@@ -32,9 +31,9 @@ export function useSearchMovies(
       list: movieList
     };
 
-    setIsSearchStatus(true);
-    localStorage.setItem(`found-${component}`, JSON.stringify(results));
-    if (component === 'saved-movies') {
+    if (component === 'movies') {
+      localStorage.setItem(`found-${component}`, JSON.stringify(results));
+    } else {
       setSavedMovies(results);
     }
   }
@@ -55,7 +54,6 @@ export function useSearchMovies(
           searchMovie(results);
         })
         .catch(() => {
-          setIsSearchStatus(false);
           setIsSearchError(true);
         })
         .finally(() => setPreloaderVisible(false));
@@ -65,7 +63,6 @@ export function useSearchMovies(
   }
 
   const renderMovies = () => {
-    setIsSearchStatus(false);
     setIsSearchError(false);
     setCounterRender({
       mobile: 5,
@@ -79,9 +76,9 @@ export function useSearchMovies(
         list: JSON.parse(localStorage.getItem(`${component}-from-server`))?.list || []
       };
 
-      setIsSearchStatus(false);
-      localStorage.setItem(`found-${component}`, JSON.stringify(results));
-      if (component === 'saved-movies') {
+      if (component === 'movies') {
+        localStorage.setItem(`found-${component}`, JSON.stringify(results));
+      } else {
         setSavedMovies(results);
       }
     } else {
@@ -91,14 +88,34 @@ export function useSearchMovies(
 
   const toggleShort = () => {
     isShort ? setIsShort(false) : setIsShort(true);
+
+    if (component === 'movies') {
+      if (localStorage.getItem(`found-${component}`)) {
+        const { query, list } = JSON.parse(localStorage.getItem(`found-${component}`));
+
+        localStorage.setItem(`found-${component}`, JSON.stringify({
+          query,
+          short: !isShort,
+          list
+        }));
+      } else {
+        if (localStorage.getItem(`${component}-from-server`)) {
+          const { query, list } = JSON.parse(localStorage.getItem(`${component}-from-server`));
+
+          localStorage.setItem(`found-${component}`, JSON.stringify({
+            query,
+            short: !isShort,
+            list
+          }));
+        }
+      }
+    }
   }
 
   return {
     query,
     setQuery,
     isShort,
-    isSearchStatus,
-    setIsSearchStatus,
     isSearchError,
     setIsSearchError,
     preloaderVisible,

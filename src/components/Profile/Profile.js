@@ -7,18 +7,23 @@ import { useFormWithValidation } from '../../hooks/useValidation';
 function Profile(props) {
   const currentUser = React.useContext(CurrentUserContext);
   const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
-  const noDuplicate = values.name !== currentUser.name || values.email !== currentUser.email;
+  const noDuplicate = (values.name !== currentUser.name) || (values.email !== currentUser.email);
 
   React.useEffect(() => {
     resetForm();
-  }, [resetForm])
+  }, [resetForm]);
+
+  React.useEffect(() => {
+    values.name = currentUser.name;
+    values.email = currentUser.email;
+  }, [values, currentUser]);
 
   function handleSubmit(evt) {
     evt.preventDefault();
 
     props.onUserUpdate({
-      name: values.name,
-      email: values.email,
+      name: values.name || currentUser.name,
+      email: values.email || currentUser.email,
     });
   }
 
@@ -44,7 +49,7 @@ function Profile(props) {
                   onChange={handleChange}
                   minLength="2"
                   maxLength="30"
-                  placeholder={currentUser.name}
+                  defaultValue={currentUser.name}
                   required
                 />
               </div>
@@ -65,7 +70,7 @@ function Profile(props) {
                   id="profile-email"
                   type="email"
                   onChange={handleChange}
-                  placeholder={currentUser.email}
+                  defaultValue={currentUser.email}
                   required
                 />
               </div>

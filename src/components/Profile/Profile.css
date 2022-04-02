@@ -60,11 +60,6 @@
   line-height: 1.18;
 }
 
-.profile__input::placeholder {
-  opacity: 1;
-  color: #fff;
-}
-
 .profile__input:focus {
   outline: 1px solid #8b8b8b;
 }
