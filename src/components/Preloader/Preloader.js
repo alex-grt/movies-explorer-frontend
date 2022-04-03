@@ -1,25 +1,13 @@
 import './Preloader.css';
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 
-function Preloader() {
-  const { pathname } = useLocation();
-
+function Preloader(props) {
   return (
-    <div
-      className={`preloader${
-        pathname === '/saved-movies' ? ' preloader_size_min' : ''
-      }`}
-    >
-      <button
-        className={`preloader__button${
-          pathname === '/saved-movies' ? ' preloader__button_invisible' : ''
+    <div className="preloader">
+      <div className={`preloader__container${
+          props.preloaderVisible ? ' preloader__container_visible' : ''
         }`}
-        type="button"
       >
-        Ещё
-      </button>
-      <div className="preloader__container">
         <span className="preloader__round"></span>
       </div>
     </div>

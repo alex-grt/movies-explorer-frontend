@@ -1,52 +1,76 @@
 import './MoviesCardList.css';
+import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import thirtyThree from '../../images/cover/33.jpg';
-import hundred from '../../images/cover/100.jpg';
-import banksy from '../../images/cover/banksy.jpg';
-import basquiat from '../../images/cover/basquiat.jpg';
-import run from '../../images/cover/run.jpg';
-import booksellers from '../../images/cover/booksellers.jpg';
-import germany from '../../images/cover/germany.jpg';
+import Preloader from '../Preloader/Preloader';
+import { NOT_SHORT_FILM } from '../../utils/constants';
 
-function MoviesCardList() {
+function MoviesCardList(props) {
+  const { pathname } = useLocation();
+
   return (
     <section className="movies">
+      <Preloader preloaderVisible={props.preloaderVisible} />
+      {pathname === '/saved-movies' ? (
+        <p className={`movies__text${
+            props.savedMovies?.list.filter(
+              (movie) => !props.isShort || movie.duration < NOT_SHORT_FILM
+            ).length === 0
+              ? ' movies__text_visible'
+              : ''
+          }`}
+        >
+          Ничего не найдено
+        </p>
+      ) : (
+        <p className={`movies__text${
+            props.movies?.list.filter(
+              (movie) => !props.isShort || movie.duration < NOT_SHORT_FILM
+            ).length === 0 && localStorage.getItem('movies-from-server')
+              ? ' movies__text_visible'
+              : ''
+          }`}
+        >
+          Ничего не найдено
+        </p>
+      )}
+      <p className={`movies__text${
+          props.searchError ? ' movies__text_visible' : ''
+        }`}
+      >
+        Во время запроса произошла ошибка. Возможно, проблема с
+        соединением или сервер недоступен. Подождите немного
+        и попробуйте ещё раз
+      </p>
       <ul className="movies__list undecorated-list">
-        <MoviesCard
-          title="33 слова о дизайне"
-          duration="1ч 42м"
-          link={thirtyThree}
-        />
-        <MoviesCard
-          title="Киноальманах «100 лет дизайна»"
-          duration="1ч 42м"
-          link={hundred}
-        />
-        <MoviesCard
-          title="В погоне за Бенкси"
-          duration="1ч 42м"
-          link={banksy}
-        />
-        <MoviesCard
-          title="Баския: Взрыв реальности"
-          duration="1ч 42м"
-          link={basquiat}
-        />
-        <MoviesCard
-          title="Бег это свобода"
-          duration="1ч 42м"
-          link={run}
-        />
-        <MoviesCard
-          title="Книготорговцы"
-          duration="1ч 42м"
-          link={booksellers}
-        />
-        <MoviesCard
-          title="Когда я думаю о Германии ночью"
-          duration="1ч 42м"
-          link={germany}
-        />
+        {pathname === '/saved-movies'
+          ? props.savedMovies?.list
+              .filter((movie) => !props.isShort || movie.duration < NOT_SHORT_FILM)
+              .map((savedMovie) => (
+                <MoviesCard
+                  key={savedMovie._id}
+                  savedMovie={savedMovie}
+                  allSavedMovies={props.allSavedMovies}
+                  deleteMovie={props.deleteMovie}
+                />
+            ))
+          : props.movies?.list
+              .filter((movie) => !props.isShort || movie.duration < NOT_SHORT_FILM)
+              .slice(
+                0,
+                props.isMobile
+                  ? props.counterRender.mobile
+                  : props.counterRender.desktop
+              )
+              .map((movie) => (
+                <MoviesCard
+                  movie={movie}
+                  key={movie.id}
+                  savedMovies={props.savedMovies}
+                  allSavedMovies={props.allSavedMovies}
+                  toggleLike={props.toggleLike}
+                />
+              ))
+        }
       </ul>
     </section>
   );

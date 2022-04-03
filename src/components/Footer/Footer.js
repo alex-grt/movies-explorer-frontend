@@ -35,12 +35,12 @@ function Footer() {
           </li>
           <li>
             <a
-              href="https://www.facebook.com/"
+              href="https://vk.com/"
               className="footer__link"
               target="_blank"
               rel="noreferrer"
             >
-              Facebook
+              ВКонтакте
             </a>
           </li>
         </ul>

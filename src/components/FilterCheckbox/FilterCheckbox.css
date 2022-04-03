@@ -33,7 +33,7 @@
   content: '';
 }
 
-.switch__checkbox:checked + .switch__slider:before {
+.switch__checkbox_checked + .switch__slider:before {
   background-color: #3ddc84;
   transform: translateX(16px);
 }

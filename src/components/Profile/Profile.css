@@ -99,6 +99,15 @@
   opacity: .7;
 }
 
+.profile__button-submit_inactive {
+  opacity: .5;
+}
+
+.profile__button-submit_inactive:hover {
+  cursor: default;
+  opacity: .5;
+}
+
 .profile__link {
   margin: 16px 0 0;
   display: inline-block;
