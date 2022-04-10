@@ -3,6 +3,7 @@ import React from 'react';
 import { useSearchMovies } from '../../hooks/useSearchMovies';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import { NOT_SHORT_FILM } from '../../utils/constants';
 
 function Movies(props) {
   const {
@@ -15,14 +16,13 @@ function Movies(props) {
     movies,
     renderMovies,
     toggleShort
-  } = useSearchMovies(
-    'movies',
-    props.setSavedMovies,
-    props.setCounterRender,
-  );
+  } = useSearchMovies('movies', props.setSavedMovies, props.setCounterRender);
   const counterRender = props.isMobile
     ? props.counterRender.mobile
     : props.counterRender.desktop;
+  const moviesToDisplay = movies?.list.filter(
+    (movie) => !isShort || movie.duration < NOT_SHORT_FILM
+  );
 
   React.useEffect(() => {
     if (!props.loggedIn) {
@@ -53,7 +53,7 @@ function Movies(props) {
       <div className="render-button">
         <button
           className={`render-button__button${
-            movies?.list.length > 0 && movies?.list.length >= counterRender
+            moviesToDisplay?.length > 0 && moviesToDisplay?.length >= counterRender
               ? ' render-button__button_visible'
               : ''
           }`}

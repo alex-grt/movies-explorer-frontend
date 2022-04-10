@@ -34,6 +34,7 @@ function App() {
     mobile: VISIBLE_ITEMS_MOBILE,
     desktop: VISIBLE_ITEMS_DESKTOP
   });
+  const [buttonLocked, setButtonLocked] = React.useState(false);
   const [buttonTitle, setButtonTitle] = React.useState({
     edit: 'Редактировать'
   });
@@ -130,6 +131,8 @@ function App() {
   }
 
   function onLogin({email, password}) {
+    setButtonLocked(true);
+
     mainApi.authorizationUser({email, password})
       .then((data) => {
         localStorage.setItem('token', data.token);
@@ -146,10 +149,13 @@ function App() {
           setTooltipContent({ title: err, text: 'На сервере произошла ошибка' });
         }
         setIsTooltipOpen(true);
-      });
+      })
+      .finally(() => setButtonLocked(false));
   }
 
   function onRegister({ name, email, password }) {
+    setButtonLocked(true);
+
     mainApi.registrationUser({ name, email, password })
       .then(() => {
         onLogin({ email, password });
@@ -169,15 +175,12 @@ function App() {
           setTooltipContent({ title: err, text: 'На сервере произошла ошибка' });
         }
         setIsTooltipOpen(true);
-      });
+      })
+      .finally(() => setButtonLocked(false));
   }
 
   function onSignOut() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('movies-from-server');
-    localStorage.removeItem('saved-movies-from-server');
-    localStorage.removeItem('found-movies');
-    localStorage.removeItem('found-saved-movies');
+    localStorage.clear();
     setSavedMovies({});
     setAllSavedMovies([]);
     setCounterRender({
@@ -188,6 +191,7 @@ function App() {
   }
 
   function handleUserUpdate({ name, email }) {
+    setButtonLocked(true);
     setButtonTitle({
       ...buttonTitle,
       edit: 'Редактирование...'
@@ -224,10 +228,13 @@ function App() {
         }
         setIsTooltipOpen(true);
       })
-      .finally(() => setButtonTitle({
-        ...buttonTitle,
-        edit: 'Редактировать'
-      }));
+      .finally(() => {
+        setButtonLocked(false);
+        setButtonTitle({
+          ...buttonTitle,
+          edit: 'Редактировать'
+        })
+      });
   }
 
   function toggleLike(movie) {
@@ -415,6 +422,7 @@ function App() {
                 loggedIn={loggedIn}
                 onUserUpdate={handleUserUpdate}
                 onSignOut={onSignOut}
+                buttonLocked={buttonLocked}
                 buttonTitle={buttonTitle.edit}
               />
             </>
@@ -425,6 +433,7 @@ function App() {
               component={Login}
               loggedIn={loggedIn}
               onLogin={onLogin}
+              buttonLocked={buttonLocked}
             />
           }
         />
@@ -433,6 +442,7 @@ function App() {
               component={Register}
               loggedIn={loggedIn}
               onRegister={onRegister}
+              buttonLocked={buttonLocked}
             />
           }
         />

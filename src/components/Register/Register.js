@@ -96,13 +96,13 @@ function Register(props) {
           </div>
           <button
             className={`register__button-submit${
-              isValid
+              isValid && !props.buttonLocked
                 ? ''
                 : ' register__button-submit_inactive'
             }`}
             type="submit"
             aria-label="кнопка Зарегистрироваться"
-            disabled={!isValid}
+            disabled={!isValid && props.buttonLocked}
           >
             Зарегистрироваться
           </button>

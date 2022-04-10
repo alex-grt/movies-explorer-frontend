@@ -76,13 +76,13 @@ function Login(props) {
           </div>
           <button
             className={`login__button-submit${
-              isValid
+              isValid && !props.buttonLocked
                 ? ''
                 : ' login__button-submit_inactive'
             }`}
             type="submit"
             aria-label="кнопка Войти"
-            disabled={!isValid}
+            disabled={!isValid && props.buttonLocked}
           >
             Войти
           </button>

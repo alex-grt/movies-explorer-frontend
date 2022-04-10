@@ -14,8 +14,8 @@ function Profile(props) {
   }, [resetForm]);
 
   React.useEffect(() => {
-    values.name = currentUser.name;
-    values.email = currentUser.email;
+    values.name = values.name || currentUser.name;
+    values.email = values.email || currentUser.email;
   }, [values, currentUser]);
 
   function handleSubmit(evt) {
@@ -84,13 +84,13 @@ function Profile(props) {
           </div>
           <button
             className={`profile__button-submit${
-              isValid && noDuplicate
+              isValid && noDuplicate && !props.buttonLocked
                 ? ''
                 : ' profile__button-submit_inactive'
             }`}
             type="submit"
             aria-label="кнопка Редактировать"
-            disabled={!isValid}
+            disabled={!isValid && !noDuplicate && props.buttonLocked}
           >
             {props.buttonTitle}
           </button>
