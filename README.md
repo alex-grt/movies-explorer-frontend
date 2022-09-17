@@ -5,8 +5,3 @@
 ## Что даёт выполнение данной работы:
 * повторение материала по работе с HTML, CSS, JavaScript и React.js  
 * повторение основ деплоя и настройки сервера.  
-## Работа с проектом
-Адрес макета - `https://www.figma.com/file/6ZxeQHSe2OKdPPWcNcnrjR/Diploma?node-id=891%3A3857`  
-Адрес проекта - `movies-explorer.agrt.nomoredomains.work`
-***
-[Ссылка на страницу проекта](https://movies-explorer.agrt.nomoredomains.work/)
